@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFileUploadsTable extends Migration
+class CreateVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateFileUploadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('file_uploads', function (Blueprint $table) {
+        Schema::create('file_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file_name')->unique(true)->nullable(false);
-            $table->bigInteger('creator_id')->nullable(false);
-            $table->softDeletes();
+            $table->unsignedBigInteger('file_id')->nullable(false);
+            $table->foreign('file_id')->references('id')->on('file_uploads')->onDelete('cascade');
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE file_versions ADD file_body LONGBLOB");
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateFileUploadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_uploads');
+        Schema::dropIfExists('versions');
     }
 }
