@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": " API",
-        "_postman_id": "08688cb0-d8c7-4583-aa88-23577b339a88",
+        "_postman_id": "327c23ab-5e33-4b01-8e29-64a73b7a8006",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -14,7 +14,7 @@
                 {
                     "name": "Get all versions of a file.",
                     "request": {
-                        "url": "http:\/\/localhost\/versions-all\/{fileID}?file_id=qui",
+                        "url": "http:\/\/localhost\/versions-all\/{fileID}?file_id=fugiat",
                         "method": "GET",
                         "header": [
                             {
@@ -37,7 +37,7 @@
                 {
                     "name": "Get version of a file.",
                     "request": {
-                        "url": "http:\/\/localhost\/version\/{fileID}\/{versionID}?file_id=dolore&version_id=consequatur",
+                        "url": "http:\/\/localhost\/version\/{fileID}\/{versionID}?file_id=accusantium&version_id=voluptatem",
                         "method": "GET",
                         "header": [
                             {
@@ -60,7 +60,7 @@
                 {
                     "name": "Get latest version of a file.",
                     "request": {
-                        "url": "http:\/\/localhost\/version-latest\/{fileID}?file_id=nisi",
+                        "url": "http:\/\/localhost\/version-latest\/{fileID}?file_id=delectus",
                         "method": "GET",
                         "header": [
                             {
@@ -97,7 +97,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"alias\",\n    \"creator_id\": 14\n}"
+                            "raw": "{\n    \"file\": \"aut\",\n    \"creator_id\": 15\n}"
                         },
                         "description": "[Saves file in the database. If a filename exists in the database and is not soft deleted, creates another version and stores it. If filename exists in the database and is soft deleted throws an error. If a filename does not exist creates new file and a new version. ]",
                         "response": []
@@ -120,7 +120,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file_id\": 9\n}"
+                            "raw": "{\n    \"file_id\": 12\n}"
                         },
                         "description": "[Restores a soft deleted file.]",
                         "response": []
@@ -143,7 +143,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file_id\": 6\n}"
+                            "raw": "{\n    \"file_id\": 4\n}"
                         },
                         "description": "[ Deletes a file and all remaining file versions even if a file is soft deleted.]",
                         "response": []
@@ -166,7 +166,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file_id\": 8\n}"
+                            "raw": "{\n    \"file_id\": 3\n}"
                         },
                         "description": "[To soft delete a file means it physically exists in the database so do its all versions. However  it is impossible to download any of its versions but it can be hard deleted. Soft deleted files can be restored. If a filename is soft deleted another file with the same name cannot be uploaded - it will throw an error.]",
                         "response": []
@@ -189,7 +189,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file_id\": 7,\n    \"file_version\": 17\n}"
+                            "raw": "{\n    \"file_id\": 19,\n    \"id\": 9\n}"
                         },
                         "description": "[ Deletes file version by specified file id and file version id. Soft deleted files cannot be deleted - this will cause an error. ]",
                         "response": []

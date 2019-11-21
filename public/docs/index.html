@@ -56,7 +56,7 @@
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "/versions-all/1?file_id=qui" \
+    -G "/versions-all/1?file_id=fugiat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -64,7 +64,7 @@
 );
 
 let params = {
-    "file_id": "qui",
+    "file_id": "fugiat",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -135,7 +135,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "/version/1/1?file_id=dolore&amp;version_id=consequatur" \
+    -G "/version/1/1?file_id=accusantium&amp;version_id=voluptatem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -143,8 +143,8 @@ fetch(url, {
 );
 
 let params = {
-    "file_id": "dolore",
-    "version_id": "consequatur",
+    "file_id": "accusantium",
+    "version_id": "voluptatem",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -242,7 +242,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "/version-latest/1?file_id=nisi" \
+    -G "/version-latest/1?file_id=delectus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -250,7 +250,7 @@ fetch(url, {
 );
 
 let params = {
-    "file_id": "nisi",
+    "file_id": "delectus",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -324,7 +324,7 @@ fetch(url, {
     "/upload-file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"alias","creator_id":14}'
+    -d '{"file":"aut","creator_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/upload-file"
@@ -336,8 +336,8 @@ let headers = {
 };
 
 let body = {
-    "file": "alias",
-    "creator_id": 14
+    "file": "aut",
+    "creator_id": 15
 }
 
 fetch(url, {
@@ -448,7 +448,7 @@ fetch(url, {
     "/restore/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":9}'
+    -d '{"file_id":12}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/restore/file"
@@ -460,7 +460,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 9
+    "file_id": 12
 }
 
 fetch(url, {
@@ -551,7 +551,7 @@ fetch(url, {
     "/delete-hard/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":6}'
+    -d '{"file_id":4}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/delete-hard/file"
@@ -563,7 +563,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 6
+    "file_id": 4
 }
 
 fetch(url, {
@@ -654,7 +654,7 @@ fetch(url, {
     "/delete-soft/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":8}'
+    -d '{"file_id":3}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/delete-soft/file"
@@ -666,7 +666,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 8
+    "file_id": 3
 }
 
 fetch(url, {
@@ -757,7 +757,7 @@ fetch(url, {
     "/delete/version" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":7,"file_version":17}'
+    -d '{"file_id":19,"id":9}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/delete/version"
@@ -769,8 +769,8 @@ let headers = {
 };
 
 let body = {
-    "file_id": 7,
-    "file_version": 17
+    "file_id": 19,
+    "id": 9
 }
 
 fetch(url, {
@@ -881,7 +881,7 @@ fetch(url, {
 <td>id of a file.</td>
 </tr>
 <tr>
-<td><code>file_version</code></td>
+<td><code>id</code></td>
 <td>integer</td>
 <td>required</td>
 <td>id of file version.</td>

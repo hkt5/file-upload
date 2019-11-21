@@ -32,7 +32,7 @@ Welcome to the generated API reference.
 
 ```bash
 curl -X GET \
-    -G "/versions-all/1?file_id=qui" \
+    -G "/versions-all/1?file_id=fugiat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -43,7 +43,7 @@ const url = new URL(
 );
 
 let params = {
-    "file_id": "qui",
+    "file_id": "fugiat",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -114,7 +114,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "/version/1/1?file_id=dolore&version_id=consequatur" \
+    -G "/version/1/1?file_id=accusantium&version_id=voluptatem" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -125,8 +125,8 @@ const url = new URL(
 );
 
 let params = {
-    "file_id": "dolore",
-    "version_id": "consequatur",
+    "file_id": "accusantium",
+    "version_id": "voluptatem",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -222,7 +222,7 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "/version-latest/1?file_id=nisi" \
+    -G "/version-latest/1?file_id=delectus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -233,7 +233,7 @@ const url = new URL(
 );
 
 let params = {
-    "file_id": "nisi",
+    "file_id": "delectus",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -307,7 +307,7 @@ curl -X POST \
     "/upload-file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file":"alias","creator_id":14}'
+    -d '{"file":"aut","creator_id":15}'
 
 ```
 
@@ -322,8 +322,8 @@ let headers = {
 };
 
 let body = {
-    "file": "alias",
-    "creator_id": 14
+    "file": "aut",
+    "creator_id": 15
 }
 
 fetch(url, {
@@ -429,7 +429,7 @@ curl -X PATCH \
     "/restore/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":9}'
+    -d '{"file_id":12}'
 
 ```
 
@@ -444,7 +444,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 9
+    "file_id": 12
 }
 
 fetch(url, {
@@ -533,7 +533,7 @@ curl -X DELETE \
     "/delete-hard/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":6}'
+    -d '{"file_id":4}'
 
 ```
 
@@ -548,7 +548,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 6
+    "file_id": 4
 }
 
 fetch(url, {
@@ -637,7 +637,7 @@ curl -X DELETE \
     "/delete-soft/file" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":8}'
+    -d '{"file_id":3}'
 
 ```
 
@@ -652,7 +652,7 @@ let headers = {
 };
 
 let body = {
-    "file_id": 8
+    "file_id": 3
 }
 
 fetch(url, {
@@ -741,7 +741,7 @@ curl -X DELETE \
     "/delete/version" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"file_id":7,"file_version":17}'
+    -d '{"file_id":19,"id":9}'
 
 ```
 
@@ -756,8 +756,8 @@ let headers = {
 };
 
 let body = {
-    "file_id": 7,
-    "file_version": 17
+    "file_id": 19,
+    "id": 9
 }
 
 fetch(url, {
@@ -865,7 +865,7 @@ fetch(url, {
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `file_id` | integer |  required  | id of a file.
-        `file_version` | integer |  required  | id of file version.
+        `id` | integer |  required  | id of file version.
     
 <!-- END_5d232eaed3563faf3c973eb7c8d7dd55 -->
 
