@@ -25,6 +25,9 @@ $app = new Laravel\Lumen\Application(
 
  $app->withEloquent();
 
+ $app->register(\Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
+ $app->configure('apidoc');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings

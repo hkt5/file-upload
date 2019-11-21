@@ -37,7 +37,7 @@ class RestoreFileStrategy
     private function tryRestoreFile(Request $request)
     {
         
-        $fileID = $request->get('id');
+        $fileID = $request->get('file_id');
 
         $validator = Validator::make(['file_id' => $fileID], $this->rules);
            

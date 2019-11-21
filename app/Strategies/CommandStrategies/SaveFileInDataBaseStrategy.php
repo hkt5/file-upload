@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Validator;
 class SaveFileInDataBaseStrategy
 {
     private $fileData;
-    private $rules;
+    private $rules = [
+            'creator_id' => 'required|integer',
+            'file_name' => 'required|string'
+        ];
 
     public function command(Request $request): JsonResponse
     {
         try 
         {
-            $this->getRequiredData($request);
+            
             return $this->tryToStoreInDataBase($request);
 
         } 
@@ -37,7 +40,7 @@ class SaveFileInDataBaseStrategy
 
     private function tryToStoreInDataBase(Request $request) : JsonResponse
     {
-        
+        $this->getRequiredData($request);
         $validator = Validator::make($this->fileData, $this->rules);
 
         if($validator->fails())
@@ -103,26 +106,37 @@ class SaveFileInDataBaseStrategy
     private function getRequiredData(Request $request)
     {
         
-        $fileName = $request->file('file')->getClientOriginalName();
+        if($request->hasFile('file'))
+        {
+            if($request->file('file')->isValid())
+            {
+                $fileName = $request->file('file')->getClientOriginalName(); 
+            }
+            else
+            {
+                throw new \Exception("There was an error while uploading the file. Please try again");
+            }
+           
+        }
+        else
+        {
+            throw new \Exception("There is no file atached");
+        }
         
+
         if($fileUpload = FileUpload::findByName($fileName))
         {
-            $this->rules = ['creator_id' => 'required|int|same:previous_creator_id'];
-            $this->fileData['previous_creator_id'] = $fileUpload->creator_id;
+            
             $this->fileData['file_id'] = $fileUpload->id;
             $this->fileData['create_new_file'] = false;
         }
         else
         {
-           $this->rules = [
-            'creator_id' => 'required|integer',
-            'file_name' => 'required|string|unique:file_uploads'
-            ];
             $this->fileData['create_new_file'] = true;
         }
 
         $this->fileData['file_name'] = $fileName;
-        $this->fileData['creator_id'] = intval($request->get('creator_id'));
+        $this->fileData['creator_id'] = $request->get('creator_id');
        
     }
 

@@ -18,7 +18,7 @@ class DeleteVersionStrategy
    
     private $rules = [
         'file_id' => 'required|integer|exists:file_uploads,id,deleted_at,NULL|exists:file_versions,file_id',
-        'file_version' => 'required|integer|exists:file_versions,id'
+        'id' => 'required|integer|exists:file_versions,id'
      ];
 
     public function command(Request $request)
@@ -58,7 +58,7 @@ class DeleteVersionStrategy
 
     private function deleteVersion(Request $request)
     {
-        $versionID = $request->get('file_version');
+        $versionID = $request->get('id');
         $fileID = $request->get('file_id');
 
         $fileVersion = FileVersion::find($versionID);

@@ -1,0 +1,201 @@
+{
+    "variables": [],
+    "info": {
+        "name": " API",
+        "_postman_id": "08688cb0-d8c7-4583-aa88-23577b339a88",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "general",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get all versions of a file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/versions-all\/{fileID}?file_id=qui",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "[Starts a download of all available file versions. A file cannot be soft deleted - requesting such file will cause an error. If there is more then one version, a zip file archive will be created and send to a user.]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get version of a file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/version\/{fileID}\/{versionID}?file_id=dolore&version_id=consequatur",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "[Starts downloading version of a file. A file cannot be soft deleted - requesting such file will cause an error. ]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get latest version of a file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/version-latest\/{fileID}?file_id=nisi",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "[Starts downloading the last version of a file. A file cannot be soft deleted, requesting soft deleted file will cause an error.]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Save a file in the database.",
+                    "request": {
+                        "url": "http:\/\/localhost\/upload-file",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file\": \"alias\",\n    \"creator_id\": 14\n}"
+                        },
+                        "description": "[Saves file in the database. If a filename exists in the database and is not soft deleted, creates another version and stores it. If filename exists in the database and is soft deleted throws an error. If a filename does not exist creates new file and a new version. ]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Restore file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/restore\/file",
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file_id\": 9\n}"
+                        },
+                        "description": "[Restores a soft deleted file.]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Hard delete file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/delete-hard\/file",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file_id\": 6\n}"
+                        },
+                        "description": "[ Deletes a file and all remaining file versions even if a file is soft deleted.]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Sof delete file.",
+                    "request": {
+                        "url": "http:\/\/localhost\/delete-soft\/file",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file_id\": 8\n}"
+                        },
+                        "description": "[To soft delete a file means it physically exists in the database so do its all versions. However  it is impossible to download any of its versions but it can be hard deleted. Soft deleted files can be restored. If a filename is soft deleted another file with the same name cannot be uploaded - it will throw an error.]",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Delete version.",
+                    "request": {
+                        "url": "http:\/\/localhost\/delete\/version",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file_id\": 7,\n    \"file_version\": 17\n}"
+                        },
+                        "description": "[ Deletes file version by specified file id and file version id. Soft deleted files cannot be deleted - this will cause an error. ]",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}

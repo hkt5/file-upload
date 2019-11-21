@@ -14,7 +14,32 @@ class FileUpload extends Model
 
     public static function findByName(string $fileName)
     {
-    	return FileUpload::where('file_name', "=", $fileName)->get()->first();
+    	$fileUpload = FileUpload::withTrashed()->where('file_name', "=", $fileName)->get();
+
+        
+        if($fileUpload->isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            $fileUpload = $fileUpload->first();
+
+            if($fileUpload->trashed())
+            {
+              throw new \Exception("The file is soft deleted");
+            } 
+            else
+            {
+               return $fileUpload;
+            } 
+        }
+       
+        
+
+        
+
+        
     }
 
     public function versions()

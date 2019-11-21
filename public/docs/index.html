@@ -1,0 +1,901 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.
+<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<!-- END_INFO -->
+<h1>general</h1>
+<!-- START_0ad440f70671fc2eda8b149ea3df832c -->
+<h2>Get all versions of a file.</h2>
+<p>[Starts a download of all available file versions. A file cannot be soft deleted - requesting such file will cause an error. If there is more then one version, a zip file archive will be created and send to a user.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "/versions-all/1?file_id=qui" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/versions-all/1"
+);
+
+let params = {
+    "file_id": "qui",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": "Starts downloading a file"
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /versions-all/{fileID}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>required</td>
+<td>integer - id of a file.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_0ad440f70671fc2eda8b149ea3df832c -->
+<!-- START_79d4523121daf45a31f17f0105488f3e -->
+<h2>Get version of a file.</h2>
+<p>[Starts downloading version of a file. A file cannot be soft deleted - requesting such file will cause an error. ]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "/version/1/1?file_id=dolore&amp;version_id=consequatur" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/version/1/1"
+);
+
+let params = {
+    "file_id": "dolore",
+    "version_id": "consequatur",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": "Starts downloading a file"
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_version": [
+            "The selected file version is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_version": [
+            "The file version must be an integer."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /version/{fileID}/{versionID}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>required</td>
+<td>integer - id of a file.</td>
+</tr>
+<tr>
+<td><code>version_id</code></td>
+<td>required</td>
+<td>integer - id of a file version.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_79d4523121daf45a31f17f0105488f3e -->
+<!-- START_4d7854141a486cca2c8fa4afe8612dff -->
+<h2>Get latest version of a file.</h2>
+<p>[Starts downloading the last version of a file. A file cannot be soft deleted, requesting soft deleted file will cause an error.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "/version-latest/1?file_id=nisi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/version-latest/1"
+);
+
+let params = {
+    "file_id": "nisi",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": "Starts downloading a file"
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /version-latest/{fileID}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>required</td>
+<td>integer - id of a file.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4d7854141a486cca2c8fa4afe8612dff -->
+<!-- START_69c2614e1033f88d116fb397ad430c2b -->
+<h2>Save a file in the database.</h2>
+<p>[Saves file in the database. If a filename exists in the database and is not soft deleted, creates another version and stores it. If filename exists in the database and is soft deleted throws an error. If a filename does not exist creates new file and a new version. ]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "/upload-file" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"alias","creator_id":14}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/upload-file"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "alias",
+    "creator_id": 14
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "file_version": {
+            "file_id": 16,
+            "updated_at": "2019-11-21 15:29:49",
+            "created_at": "2019-11-21 15:29:49",
+            "id": 34
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "creator_id": [
+            "The creator id field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "creator_id": [
+            "The creator id must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "error": "There is no file atached"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "error": "There was an error while uploading the file. Please try again"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "error": "The file is soft deleted"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /upload-file</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>file</td>
+<td>required</td>
+<td>a selected file.</td>
+</tr>
+<tr>
+<td><code>creator_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>an id of creator.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_69c2614e1033f88d116fb397ad430c2b -->
+<!-- START_e42f52b7bd696b1338d1d0ad6640dc9f -->
+<h2>Restore file.</h2>
+<p>[Restores a soft deleted file.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PATCH \
+    "/restore/file" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file_id":9}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/restore/file"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file_id": 9
+}
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "file": {
+            "id": 13,
+            "file_name": "magnetar.jpg",
+            "creator_id": 1,
+            "deleted_at": null,
+            "created_at": "2019-11-20 17:04:23",
+            "updated_at": "2019-11-21 15:16:10"
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PATCH /restore/file</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>id of a file.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_e42f52b7bd696b1338d1d0ad6640dc9f -->
+<!-- START_1736d6f7c1ee495bbd80bf2c6f694a3d -->
+<h2>Hard delete file.</h2>
+<p>[ Deletes a file and all remaining file versions even if a file is soft deleted.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "/delete-hard/file" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file_id":6}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/delete-hard/file"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file_id": 6
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "file": {
+            "id": 15,
+            "file_name": "axi.jpg",
+            "creator_id": 1,
+            "deleted_at": null,
+            "created_at": "2019-11-21 14:32:04",
+            "updated_at": "2019-11-21 14:32:04"
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /delete-hard/file</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>id of a file.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1736d6f7c1ee495bbd80bf2c6f694a3d -->
+<!-- START_7ca86262e93601817c6cd5a79c8ccdf3 -->
+<h2>Sof delete file.</h2>
+<p>[To soft delete a file means it physically exists in the database so do its all versions. However  it is impossible to download any of its versions but it can be hard deleted. Soft deleted files can be restored. If a filename is soft deleted another file with the same name cannot be uploaded - it will throw an error.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "/delete-soft/file" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file_id":8}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/delete-soft/file"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file_id": 8
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "file": {
+            "id": 13,
+            "file_name": "magnetar.jpg",
+            "creator_id": 1,
+            "deleted_at": null,
+            "created_at": "2019-11-20 17:04:23",
+            "updated_at": "2019-11-21 15:16:10"
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The selected file id is invalid."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /delete-soft/file</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>id of a file.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_7ca86262e93601817c6cd5a79c8ccdf3 -->
+<!-- START_5d232eaed3563faf3c973eb7c8d7dd55 -->
+<h2>Delete version.</h2>
+<p>[ Deletes file version by specified file id and file version id. Soft deleted files cannot be deleted - this will cause an error. ]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "/delete/version" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file_id":7,"file_version":17}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "/delete/version"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file_id": 7,
+    "file_version": 17
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "file_version": {
+            "id": 28,
+            "file_id": 13,
+            "created_at": "2019-11-20 17:04:39",
+            "updated_at": "2019-11-20 17:04:39"
+        }
+    },
+    "error_messages": []
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_version": [
+            "The file version field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ],
+        "file_version": [
+            "The selected file version is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id must be an integer."
+        ],
+        "file_version": [
+            "The selected file version is invalid."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ],
+        "file_version": [
+            "The file version must be an integer."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": {
+        "file_id": [
+            "The file id field is required."
+        ],
+        "file_version": [
+            "The file version field is required."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /delete/version</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>id of a file.</td>
+</tr>
+<tr>
+<td><code>file_version</code></td>
+<td>integer</td>
+<td>required</td>
+<td>id of file version.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_5d232eaed3563faf3c973eb7c8d7dd55 -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>
