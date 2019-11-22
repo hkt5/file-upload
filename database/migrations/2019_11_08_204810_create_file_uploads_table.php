@@ -29,6 +29,8 @@ class CreateFileUploadsTable extends Migration
      */
     public function down()
     {
+        
+        Schema::dropIfExists('file_versions');
         Schema::dropIfExists('file_uploads');
     }
 }
