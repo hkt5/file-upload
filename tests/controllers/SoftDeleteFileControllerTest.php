@@ -3,13 +3,11 @@
 use App\FileVersion;
 use App\FileUpload;
 use Illuminate\Http\Response;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\WithoutEvents;
 use Laravel\Lumen\Testing\WithoutMiddleware;
 
-class SaveFileInDataBaseControllerTest extends TestCase
+class SoftDeleteFileControllerTest extends TestCase
 {
     use WithoutEvents;
     use WithoutMiddleware;
@@ -21,10 +19,15 @@ class SaveFileInDataBaseControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        
         $this->createNewFileUpload(1);
         $this->createNewFileVersion(1,1);
+
+      //soft deleted
+        $this->createNewFileUpload(2,"soft_deleted_file.txt", true);
+        $this->createNewFileVersion(2,3);
     }
-    
+
     private function createNewFileUpload($id, $name = "test.txt", $softDeleted = false)
     {
         $fileUpload = new FileUpload();
@@ -52,30 +55,22 @@ class SaveFileInDataBaseControllerTest extends TestCase
         $fileVersion->file_body = $content;
         $fileVersion->save();
     }
-    
-
-    public function testUploadFile() : void
+    public function testSoftDeleteFile() : void
     {
-       
-        
-        $handle = fopen('test.txt','rb');
-        $content = fread($handle, filesize('test.txt'));
-        fclose($handle);
-
+        // given
         $data = [
-            'creator_id' => 1,
-            'file' => $content
-
+            'file_id' => 1,
         ];
 
-         
-        $result = $this->post('/upload-file', $data);
-        dd($result);
+        // when
+        $result = $this->delete('/delete-soft/file', $data);
+        
+        // then
         $result->seeStatusCode(Response::HTTP_OK);
-        $result->seeJsonContains(['creator_id' => 2]);
+        $result->seeJsonContains(['id' => 1]);
     }
-    /*
-    public function testRestoreFileThatDoesNotExist() : void
+    
+    public function testSoftDeleteFileThatDoesNotExist() : void
     {
         // given
         $data = [
@@ -88,17 +83,17 @@ class SaveFileInDataBaseControllerTest extends TestCase
             ],
         ];
         // when
-         $result = $this->patch('/restore/file', $data);
+         $result = $this->delete('/delete-soft/file', $data);
         // then
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJsonContains($response);
     }
 
-    public function testRestoreFileThatIsNotSoftDeleted() : void
+    public function testSoftDeleteFileThatIsSoftDeleted() : void
     {
         // given
         $data = [
-            'file_id' => 1
+            'file_id' => 2
         ];
 
         $response = [
@@ -108,14 +103,14 @@ class SaveFileInDataBaseControllerTest extends TestCase
         ];
 
         // when
-         $result = $this->patch('/restore/file', $data);
+         $result = $this->delete('/delete-soft/file', $data);
         // then
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJsonContains($response);
     }
 
 
-    public function testRestoreFileWithIdThatIsNotInteger() : void
+    public function testDeleteSoftFileWithIDThatIsNotInteger() : void
     {
         // given
         $data = [
@@ -128,17 +123,17 @@ class SaveFileInDataBaseControllerTest extends TestCase
             ],
         ];
         // when
-         $result = $this->patch('/restore/file', $data);
+         $result = $this->delete('/delete-soft/file', $data);
         // then
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJsonContains($response);
     }
 
-    public function testRestoreFileWithMissingID() : void
+    public function testDeleteSoftFileWithMissingID() : void
     {
         // given
         $data = [
-    
+            
         ];
 
         $response = [
@@ -147,10 +142,10 @@ class SaveFileInDataBaseControllerTest extends TestCase
             ],
         ];
         // when
-         $result = $this->patch('/restore/file', $data);
+         $result = $this->delete('/delete-soft/file', $data);
         // then
         $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
         $result->seeJsonContains($response);
     }
-    */
+    
 }
