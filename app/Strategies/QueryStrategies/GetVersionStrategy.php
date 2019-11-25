@@ -73,7 +73,8 @@ class GetVersionStrategy
         }
         else
         {
-           throw new \Exception("The file has been corrupted");
+          unlink($filePath);
+           throw new \Exception("The file version has been corrupted");
         }
     }
 

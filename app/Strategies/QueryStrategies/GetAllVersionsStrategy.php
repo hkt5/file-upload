@@ -63,9 +63,27 @@ class GetAllVersionsStrategy
         
         $fileVersions = $file->versions;
         $fileName = $file->file_name;
-         
-        return $fileVersions->count() === 1 ? $this->getRawFile($fileVersions->first(), $fileName) : $this->getZIPArchive($fileVersions, $fileName);
 
+        if($fileVersions->count() === 1)
+        {
+            $fileVersion = $fileVersions->first();
+            $filePath = $this->getRawFile($fileVersion,$fileName);
+
+            if($fileVersion->hasCorrectCheckSum($filePath))
+            {
+                return $filePath;
+            }
+            else
+            {
+                unlink($filePath);
+                throw new \Exception("The file version with id : $fileVersion->id has been corrupted");
+            }
+        }
+        else
+        {
+           return $this->getZIPArchive($fileVersions, $fileName); 
+        }
+         
     }
 
     private function getRawFile($fileVersion, String $fileName, $randomName = true, $subfolder = "")
@@ -96,14 +114,15 @@ class GetAllVersionsStrategy
          {
                
                  $sourceFilePath = $this->getRawFile($fileVersion, $fileName, false, $temporaryFolderForSourceFiles);
+                 array_push($sourceFilesPaths, $sourceFilePath);
 
                 if($fileVersion->hasCorrectCheckSum($sourceFilePath))
                {
-                 array_push($sourceFilesPaths, $sourceFilePath);
                  $zipArchive->addFile($sourceFilePath); 
                }
                else
                {
+                $this->cleanGarbageFiles($sourceFilesPaths, $temporaryFolderForSourceFiles);
                  throw new \Exception("The file version with id : $fileVersion->id has been corrupted");
                }
         }
