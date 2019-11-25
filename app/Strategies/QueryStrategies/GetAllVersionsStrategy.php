@@ -89,15 +89,25 @@ class GetAllVersionsStrategy
 
         if($zipArchive->open($zipPath, \ZipArchive::CREATE) !== true)
         {
-            throw new \Exception("Error while creating zip archive");
+            throw new \Exception("Error while creating zip archive. Please try again.");
         }
 
          foreach($fileVersions->all() as $fileVersion)
          {
-               $sourceFilePath = $this->getRawFile($fileVersion, $fileName, false, $temporaryFolderForSourceFiles);
-               array_push($sourceFilesPaths, $sourceFilePath);
-               $zipArchive->addFile($sourceFilePath); 
-         }
+               
+                 $sourceFilePath = $this->getRawFile($fileVersion, $fileName, false, $temporaryFolderForSourceFiles);
+
+                if($fileVersion->hasCorrectCheckSum($sourceFilePath))
+               {
+                 array_push($sourceFilesPaths, $sourceFilePath);
+                 $zipArchive->addFile($sourceFilePath); 
+               }
+               else
+               {
+                 throw new \Exception("The file version with id : $fileVersion->id has been corrupted");
+               }
+        }
+               
          
          
          $zipArchive->close();

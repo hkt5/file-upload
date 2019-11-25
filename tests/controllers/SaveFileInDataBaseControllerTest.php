@@ -59,20 +59,20 @@ class SaveFileInDataBaseControllerTest extends TestCase
        
         
         $handle = fopen('test.txt','rb');
-        $content = fread($handle, filesize('test.txt'));
+        $file = fread($handle, filesize('test.txt'));
         fclose($handle);
 
         $data = [
             'creator_id' => 1,
-            'file' => $content
+            'file' => $file
 
         ];
 
          
         $result = $this->post('/upload-file', $data);
-        dd($result);
+       dd($result);
         $result->seeStatusCode(Response::HTTP_OK);
-        $result->seeJsonContains(['creator_id' => 2]);
+        $result->seeJsonContains(['creator_id' => 1]);
     }
     /*
     public function testRestoreFileThatDoesNotExist() : void

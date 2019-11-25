@@ -63,7 +63,16 @@ class GetLatestVersionStrategy
        $file =  fopen($filePath,"x");
        fwrite($file, $fileBody);
        fclose($file);
-       return response()->download($filePath, $fileUpload->file_name)->deleteFileAfterSend();
+
+       if($fileVersion->hasCorrectCheckSum($filePath))
+       {
+         return response()->download($filePath, $fileUpload->file_name)->deleteFileAfterSend();
+       }
+       else
+       {
+          throw new \Exception("The file has been corrupted");
+       }
+       
     }
 
 }

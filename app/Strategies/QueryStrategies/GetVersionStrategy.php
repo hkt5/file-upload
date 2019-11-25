@@ -60,12 +60,21 @@ class GetVersionStrategy
        $fileUpload = FileUpload::find($fileID);
        $fileExtension = File::getExtension($fileUpload->file_name);
        $fileVersion = FileVersion::find($versionID);
-       $fileBody = $fileVersion->file_body;
-       $filePath = 'downloads/'.File::generateRandomName().'.'.$fileExtension;
-       $file =  fopen($filePath,"x");
-       fwrite($file, $fileBody);
-       fclose($file);
-       return response()->download($filePath, $fileUpload->file_name)->deleteFileAfterSend();
+
+          $fileBody = $fileVersion->file_body;
+          $filePath = 'downloads/'.File::generateRandomName().'.'.$fileExtension;
+          $file =  fopen($filePath,"x");
+          fwrite($file, $fileBody);
+          fclose($file);
+       
+        if($fileVersion->hasCorrectCheckSum($filePath))
+        {
+           return response()->download($filePath, $fileUpload->file_name)->deleteFileAfterSend();
+        }
+        else
+        {
+           throw new \Exception("The file has been corrupted");
+        }
     }
 
 }

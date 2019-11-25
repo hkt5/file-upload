@@ -80,13 +80,18 @@ class SaveFileInDataBaseStrategy
     private function createNewFileVersion(Request $request, int $id) : FileVersion
     {
         $newFileVersion = new FileVersion(); 
-        $newFileVersion->file_body = $this->getFileBinaryData($request);
+        $fileData = $this->getFileData($request);
+        $newFileVersion->check_sum = $fileData['check_sum'];
+        $newFileVersion->file_body = $fileData['body'];
         $newFileVersion->file_id = $id;
         $newFileVersion->save();
+        unset($newFileVersion->file_body);
         return $newFileVersion;
     }
 
-    private function getFileBinaryData(Request $request)
+    
+
+    private function moveUploadedFile(Request $request) : String
     {
         $folder = 'uploads';
         $fileName = File::generateRandomName();
@@ -94,12 +99,25 @@ class SaveFileInDataBaseStrategy
         $fileName .= $fileExtension;
         $filePath = $folder.'/'.$fileName;
         $request->file('file')->move($folder, $fileName);
-        $handle = fopen($filePath,"rb");
-        $content = fread($handle, filesize($filePath));
-        fclose($handle);
-        unlink($filePath);
-        return $content;
+        return $filePath; 
+    }
 
+    private function getFileBody(String $filePath)
+    {
+      $handle = fopen($filePath,"rb");
+      $fileBody = fread($handle, filesize($filePath));
+      fclose($handle);
+      return $fileBody;
+    }
+
+    private function getFileData(Request $request)
+    {
+        $filePath = $this->moveUploadedFile($request);
+        $fileData['body'] = $this->getFileBody($filePath);
+        $fileData['check_sum'] = FileVersion::getCheckSum($filePath);
+        
+        unlink($filePath);
+        return $fileData;
     }
 
 

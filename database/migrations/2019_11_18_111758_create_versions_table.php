@@ -17,6 +17,7 @@ class CreateVersionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('file_id')->nullable(false);
             $table->foreign('file_id')->references('id')->on('file_uploads')->onDelete('cascade');
+            $table->string('check_sum')->nullable(false);
             $table->timestamps();
         });
 
